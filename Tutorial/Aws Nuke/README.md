@@ -3,7 +3,7 @@
 
 Aws Nuke는 코드를 이용해서 Aws리소스를 삭제하도록 도와주는 프로그램입니다.
 
-Github 링크
+[Github 링크](https://github.com/rebuy-de/aws-nuke/releases)
 
 우선 Aws Nuke를 사용하기 위해 위의 링크로 접속하여
 최신버전의 Nuke.exe를 다운로드 해줍니다.
@@ -50,3 +50,7 @@ aws configure --profile <사용자 별칭>
 ```
 .\<다운받은 exe파일 이름> -c .\config.yml --no-dry-run --profile <사용자 별칭>
 ```
+
+
+
+
