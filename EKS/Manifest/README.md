@@ -24,9 +24,9 @@ Inbound : 22, 10250, 443, 1025-65525  sg-<클러스터 보안그룹> <br>
 Outbound : All_Trafic  0.0.0.0/0
 
 ## NodeGroup IAM Role
-AmazonEKSWorkerNodePolicy
-AmazonEC2ContainerRegistryReadOnly
-AmazonEKS_CNI_Policy
+AmazonEKSWorkerNodePolicy <br>
+AmazonEC2ContainerRegistryReadOnly <br>
+AmazonEKS_CNI_Policy <br>
 
 <br>
 
