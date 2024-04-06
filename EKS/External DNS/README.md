@@ -2,7 +2,7 @@
 <br>
 
 ```
-curl -o dns-policy.json https://raw.githubusercontent.com/wngnl05/Aws/main/Kubernetes/External-DNS/dns-policy.json
+curl -o dns-policy.json https://raw.githubusercontent.com/wngnl/Aws/main/EKS/External%20DNS/dns-policy.json
 ```
 <br>
 
@@ -28,7 +28,7 @@ rbac가 실행되는지 확인하고
 <br>
 
 ```
-curl -o external-dns.yaml https://raw.githubusercontent.com/wngnl05/Aws/main/Kubernetes/External-DNS/external-dns.yaml
+curl -o external-dns.yaml https://raw.githubusercontent.com/wngnl/Aws/main/EKS/External%20DNS/external-dns.yaml
 ```
 Route53에서 호스팅 영역을 프라이빗으로 생성해주고
 external-dns.yaml파일에서 "호스팅 영역 이름", "호스팅 영역 ID"를 수정해주세요
