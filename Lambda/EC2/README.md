@@ -32,7 +32,7 @@ instance = ec2.create_instances(
 
 print(instance)
 ```
-
+<br>
 
 # Lambda 특정 태그를 가진 Instance 종료하기
 
