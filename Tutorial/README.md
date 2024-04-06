@@ -21,7 +21,7 @@ sudo chmod 666 /var/run/docker.sock
 aws configure
 ```
 
-## [Install Eksctl] (https://github.com/eksctl-io/eksctl/blob/main/README.md#installation)
+## [Install Eksctl](https://github.com/eksctl-io/eksctl/blob/main/README.md#installation)
 ```
 ARCH=amd64
 PLATFORM=$(uname -s)_$ARCH
@@ -29,7 +29,7 @@ curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
 ```
-## [Install Kubectl] (https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html)
+## [Install Kubectl](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html)
 ```
 sudo chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin
