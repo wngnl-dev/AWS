@@ -1,5 +1,5 @@
 ## EKS Cluster 보안그룹
-Inbound : 80, 443  0.0.0.0/0
+Inbound : 80, 443  0.0.0.0/0 <br>
 Outbound : All_Trafic  0.0.0.0/0
 
 ## Upadate Cluster to EC2 < 2 중 1 > 
@@ -20,7 +20,7 @@ eksctl utils associate-iam-oidc-provider --region=<리전> --cluster=<클러스�
 <br>
 
 ## NodeGroup 보안그룹
-Inbound : 22, 10250, 443, 1025-65525  sg-<클러스터 보안그룹>
+Inbound : 22, 10250, 443, 1025-65525  sg-<클러스터 보안그룹> <br>
 Outbound : All_Trafic  0.0.0.0/0
 
 ## NodeGroup IAM Role
