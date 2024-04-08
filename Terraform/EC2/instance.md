@@ -18,7 +18,7 @@ resource "aws_instance" "WNGNL_EC2" {
     systemctl restart sshd
   EOF
 
-  iam_instance_profile = < IAM 역할 이름 >
+  iam_instance_profile = "< IAM 역할 이름 >"
   tags = { Name = skills-bastion }
 }
 ```
