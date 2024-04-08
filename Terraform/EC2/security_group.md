@@ -3,6 +3,7 @@
 resource "aws_security_group" "skills_security_group" {
   vpc_id = aws_vpc.vpc.id
   name   = "skills-sg"
+
   # 인바운드
   dynamic "ingress" {
     content {
