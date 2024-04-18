@@ -4,11 +4,15 @@ kind: ClusterRole
 metadata:
   name: fluent-bit-read
 rules:
-- apiGroups: [""]
+- apiGroups:
+  - ""
   resources:
   - namespaces
   - pods
-  verbs: ["get", "list", "watch"]
+  verbs:
+  - get
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -21,13 +25,13 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: fluent-bit
-  namespace: <네임스페이스>
+  namespace: skills
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fluent-bit-config
-  namespace: <네임스페이스>
+  namespace: skills
   labels:
     k8s-app: fluent-bit
 data:
@@ -52,7 +56,7 @@ data:
         Path              /var/log/containers/*.log
         Parser            docker
         DB                /var/log/flb_kube.db
-        Mem_Buf_Limit     50MB
+        Mem_Buf_Limit     5MB
         Skip_Long_Lines   On
         Refresh_Interval  10
 
@@ -60,20 +64,20 @@ data:
     [FILTER]
         Name                grep
         Match               kube.*
-        Regex               log .*\"requestURI\":\"/health\"        
+        Regex               log GET /health
 
   output-elasticsearch.conf: |
     [OUTPUT]
-        Name            es
-        Match           *
-        Host            <HTTP 없이 OpenSearch 앤드포인트>
-        Port            443
-        TLS             On
-        AWS_Auth        On
-        AWS_Region      <리전>
-        # Index           <Dashboard 이름 설정>
-        Type            _doc
-        Retry_Limit     6
+        Name               es
+        Match              *
+        Host               ${OPENSEARCH_ENDPOINT}
+        Port               443
+        TLS                On
+        AWS_Auth           On
+        AWS_Region         ${AWS_REGION}
+        Index              ${INDEX_NAME}
+        Replace_Dots       On
+        Suppress_Type_Name On
 
   parsers.conf: |
     [PARSER]
@@ -126,12 +130,11 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluent-bit
-  namespace: <네임스페이스>
+  namespace: skills
   labels:
     k8s-app: fluent-bit-logging
     version: v1
     kubernetes.io/cluster-service: "true"
-
 spec:
   selector:
     matchLabels:
@@ -148,8 +151,15 @@ spec:
         prometheus.io/path: /api/v1/metrics/prometheus
     spec:
       containers:
-      - name: fluent-bit
-        image: amazon/aws-for-fluent-bit:2.32.2
+      - env:
+        - name: OPENSEARCH_ENDPOINT
+          value: search-skills-logging-q5j37umd3xasrzwfi7jnwjloji.ap-northeast-2.es.amazonaws.com
+        - name: AWS_REGION
+          value: ap-northeast-2
+        - name: INDEX_NAME
+          value: skills-health-logging
+        name: fluent-bit
+        image: amazon/aws-for-fluent-bit:2.28.0
         imagePullPolicy: Always
         ports:
           - containerPort: 2020
@@ -161,15 +171,23 @@ spec:
           readOnly: true
         - name: fluent-bit-config
           mountPath: /fluent-bit/etc/
-      terminationGracePeriodSeconds: 10
-      volumes:
-      - name: varlog
-        hostPath:
-          path: /var/log
-      - name: varlibdockercontainers
-        hostPath:
-          path: /var/lib/docker/containers
-      - name: fluent-bit-config
-        configMap:
-          name: fluent-bit-config
       serviceAccountName: fluent-bit
+      terminationGracePeriodSeconds: 10
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      - effect: NoExecute
+        operator: Exists
+      - effect: NoSchedule
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /var/log
+        name: varlog
+      - hostPath:
+          path: /var/lib/docker/containers
+        name: varlibdockercontainers
+      - configMap:
+          name: fluent-bit-config
+        name: fluent-bit-config
