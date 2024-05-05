@@ -4,12 +4,9 @@ metadata:
   name: <RBAC 역활 이름>
   namespace: <네임스페이스>
 rules:
-  - apiGroups: 
-    - '*'
-    resources:
-    - '*'
-    verbs: 
-    - '*'
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
