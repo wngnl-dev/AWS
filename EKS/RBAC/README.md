@@ -6,11 +6,11 @@
 
 <br>
 
-## 읽기 verbs
+## read verbs
 ```
 "get", "list", "watch"
 ```
-## 쓰기 verbs
+## write verbs
 ```
 "create", "update", "patch", "delete"
 ```
