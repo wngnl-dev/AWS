@@ -9,3 +9,7 @@ data:
       username: <사용자 이름>
       groups:
         - <그룹 이름>
+    - userarn: <사용자 ARN>
+      username: <사용자 이름>
+      groups:
+        - <그룹 이름>
