@@ -3,17 +3,11 @@
 먼저 RDS를 생성할때 비밀번호를 Secret Manager로 생성해줘야 합니다.
 
 #### **1\. EKS IAM 역활 및 정책**
-
-더보기
-
 EKS 포드가 AWS Secrets Manager의 비밀에 접근할 수 있도록 IAM 정책을 생성합니다,
-
 이 정책은  EKS 포드에서 사용하는 서비스 계정에 연결합니다.
-
 ```
 Secret_Manager_ARN=""
 ```
-
 ```
 aws iam create-policy --policy-name wngnl-SecretsManagerAccessPolicy --policy-document "{
     \"Version\": \"2012-10-17\",
@@ -29,17 +23,17 @@ aws iam create-policy --policy-name wngnl-SecretsManagerAccessPolicy --policy-do
     ]
 }"
 ```
+<br><br>
 
 **환경 변수 설정**
-
 ```
 CLUSTER_NAME="<클러스터 이름>"
 NAMESPACE="<네임스페이스>"
 SERVICE_ACCOUNT_NAME="<서비스 어카운트 이름>"
 ```
+<br><br>
 
 **ServiceAccount 만들기 && SecretProvideClass 역활 만들기**
-
 ex. Pod에 부여할 역활이 있으면 wngnl-SecretProviderClass-Role에 정책을 추가해주세요.
 
 ```
@@ -75,9 +69,9 @@ aws iam create-role --role-name wngnl-SecretProviderClass-Role --assume-role-pol
 # 역활에 정책 연결하기
 aws iam attach-role-policy --role-name wngnl-SecretProviderClass-Role --policy-arn $POLICY_ARN
 ```
+<br><br>
 
 #### **2\. Secret Store CSI Driver 설치**
-
 ```
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 helm install csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --namespace kube-system --set syncSecret.enabled=true --set enableSecretRotation=true
@@ -87,14 +81,13 @@ helm install -n kube-system secrets-provider-aws aws-secrets-manager/secrets-sto
 kubectl get daemonsets -n kube-system -l app=secrets-store-csi-driver-provider-aws
 ```
 
+<br><br><br>
 **1-secret-provider-class.yaml && 3-deployment.yaml은 수정해줘야 합니다**
-
 ```
 curl -o 1-secret-provider-class.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/1-secret-provider-class.yaml
 curl -o 2-values.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/2-values.yaml
 curl -o 3-deployment.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/3-deployment.yaml
 ```
-
 ```
 kubectl apply -f 1-secret-provide-class.yaml
 kubectl apply -f 2-value.yaml
