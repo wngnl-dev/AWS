@@ -84,9 +84,8 @@ kubectl get daemonsets -n kube-system -l app=secrets-store-csi-driver-provider-a
 <br><br><br>
 **1-secret-provider-class.yaml && 3-deployment.yaml은 수정해줘야 합니다**
 ```
-curl -o 1-secret-provider-class.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/1-secret-provider-class.yaml
-curl -o 2-values.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/2-values.yaml
-curl -o 3-deployment.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/3-deployment.yaml
+curl -o secret-provider-class.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/secret-provider-class.yaml
+curl -o deployment.yaml https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/SecretClassProvider/RDS_SecretManager/deployment.yaml
 ```
 ```
 kubectl apply -f 1-secret-provide-class.yaml
