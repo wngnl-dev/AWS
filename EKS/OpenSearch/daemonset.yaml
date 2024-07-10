@@ -24,11 +24,11 @@ spec:
       containers:
       - env:
         - name: OPENSEARCH_ENDPOINT
-          value: search-skills-opensearch-domain-fuejq6ya56c5plwsod4lufdy6i.ap-northeast-2.es.amazonaws.com
+          value: <OPENSEARCH 앤드포인트 https 빼고>
         - name: AWS_REGION
-          value: ap-northeast-2
-        - name: CUSTOMER_INDEX
-          value: customer-2024.07.09
+          value: <리전>
+        - name: <환경변수>
+          value: <값>
 
         name: fluent-bit
         image: amazon/aws-for-fluent-bit:2.32.2
