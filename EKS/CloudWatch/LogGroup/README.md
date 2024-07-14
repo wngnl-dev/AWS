@@ -47,15 +47,11 @@ wget https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/CloudWatch/LogGrou
 ```
 
 1\. **daemonset.yaml** 에서 **환경변수 (리전)** 을 작성해줍니다.
-
 2\. **serviceaccount.yaml** 에서 6번째 줄에 **<당신의 AWS 아이디>**를 작성해줍니다.
+3\. **fluentbit.yaml** 에서 **\[INPUT\], \[FILTER\], \[OUTPUT\]** 를 수정해줍니다.
 
-3. **fluentbit.yaml** 에서 **\[INPUT\], \[FILTER\], \[OUTPUT\]** 를 수정해줍니다.
-
-[##_Image|kage@Oo2S7/btsIyIWFr71/HxCwbuk6krFctu9FE8sljK/img.png|CDM|1.3|{"originWidth":1384,"originHeight":364,"style":"widthContent"}_##]
-
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FOo2S7%2FbtsIyIWFr71%2FHxCwbuk6krFctu9FE8sljK%2Fimg.png)
 1개 이상의 로그그룹을 생성할려면 "@INCLUDE <deployment 이름>.conf" 를 추가하고 
-
 아래 코드도 추가해줍니다.
 
 ```
