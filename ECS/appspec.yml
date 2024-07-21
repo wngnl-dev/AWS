@@ -4,7 +4,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "<WNGNL_TASK_DEFINITION>"
+        TaskDefinition: "<TASK_DEFINITION>"
         LoadBalancerInfo:
           ContainerName: "<컨테이너 이름>"
           ContainerPort: <애플리케이션 포트>
