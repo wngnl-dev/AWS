@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: <앱 이름>
+  namespace: <네임스페이스>
+spec:
+  project: default
+  source:
+    repoURL: '<CodeCommit URI>'
+    targetRevision: HEAD
+    path: manifests
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: < rollout이 있는 네임스페이스 >
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
