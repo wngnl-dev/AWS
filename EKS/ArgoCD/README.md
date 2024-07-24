@@ -37,8 +37,8 @@ kubectl get pod -n argo-rollouts
 kubectl port-forward -n argocd svc/argocd-server 8080:443
 ```
 
-![ex_screenshot]('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FQLYuJ%2FbtsILglxiXn%2F2bM1a3QQA9P0MkkA4TFSP1%2Fimg.png')
-![ex_screenshot]('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSKDMf%2FbtsIKV9Suo7%2FkbNSuc6j0hFSztzqIv9Bmk%2Fimg.png')
+![ex_screenshot](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FQLYuJ%2FbtsILglxiXn%2F2bM1a3QQA9P0MkkA4TFSP1%2Fimg.png)
+![ex_screenshot](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSKDMf%2FbtsIKV9Suo7%2FkbNSuc6j0hFSztzqIv9Bmk%2Fimg.png)
 
 ```
 127.0.0.1:8080
