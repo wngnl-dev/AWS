@@ -50,11 +50,12 @@ mkdir script
 wget -O script/ec2_deploy.sh https://raw.githubusercontent.com/wngnl-dev/AWS/main/CICD/EC2_Deploy/script/ec2_deploy.sh
 ```
 
-[##_Image|kage@bjnaJK/btsIPUbxLpw/fviA86kInkFk0kXWVdW3Y1/img.png|CDM|1.3|{"originWidth":610,"originHeight":87,"style":"widthContent"}_##][##_Image|kage@dn9oEn/btsIPUCDoo7/gYW1xqZN3E8zTbktcEWFz1/img.png|CDM|1.3|{"originWidth":712,"originHeight":211,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-27(1).png">
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-27(2).png">
 
 \- **CodeDeploy** 모두 **온프레미스 인스턴스**를 선택해줍니다.
 
-[##_Image|kage@c0In3R/btsIPJ85EDZ/CREZfDIZiZW0VTiX8BUrrk/img.png|CDM|1.3|{"originWidth":720,"originHeight":142,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-27(3).png">
 
 \- **CodePipeline** 
 
