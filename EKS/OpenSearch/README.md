@@ -1,6 +1,8 @@
 **OpenSearch 도매인 생성할 때 참고하세요.**
 
-[##_Image|kage@pUoUr/btsIRmltqnt/OOVSK937Ig1ZhEN3SqPXl0/img.png|CDM|1.3|{"originWidth":733,"originHeight":309,"style":"widthContent"}_##][##_Image|kage@VSJ2s/btsIRWfDjX7/uhCqjidCfOe7MT1uoeb7Uk/img.png|CDM|1.3|{"originWidth":741,"originHeight":288,"style":"widthContent"}_##][##_Image|kage@b68WgO/btsIQp4kEMu/vYSz13JtgkSzRX3QjiHfr1/img.png|CDM|1.3|{"originWidth":741,"originHeight":414,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(1).png">
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(2).png">
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(3).png">
 
 **최대 절 수에 1024를 꼭 적어주세요.**
 
@@ -88,6 +90,20 @@ wget https://raw.githubusercontent.com/wngnl-dev/AWS/main/EKS/OpenSearch/fluentb
 daemonset.yaml, serviceaccount.yaml, fluentbit.yaml을 수정하고 apply 해줍니다.
 
 ```
+export CLUSTER_NAME=<클러스터 이름>
+export LOGGING_ROLE=$(kubectl get sa fluent-bit -n default -o json |jq '.metadata.annotations."eks.amazonaws.com/role-arn"' -r)
+export OPEN_SEARCH_ENDPOINT=<OpenSearch 앤드포인트>
+export OPEN_SEARCH_MASTER_PASSWORD=<OpenSearch 비밀번호>
+
+curl -sS -u "${OPEN_SEARCH_MASTER_USER}:${OPEN_SEARCH_MASTER_PASSWORD}" \
+    -X PATCH ${OPEN_SEARCH_ENDPOINT}/_opendistro/_security/api/rolesmapping/all_access?pretty \
+    -H 'Content-Type: application/json' \
+    -d '[{"op": "add", "path": "/backend_roles", "value": [ "'${LOGGING_ROLE}'" ]}]'
+```
+
+**OpenSearh 보안 역활 업데이트**
+
+```
 kubectl logs daemonset.apps/fluent-bit
 ```
 
@@ -97,7 +113,7 @@ kubectl logs daemonset.apps/fluent-bit
 
 #### **OpenSearch 설정**
 
-[##_Image|kage@t80Nk/btsISHWAnZd/YBstbt5Kpu78ItF9ayKF01/img.png|CDM|1.3|{"originWidth":1164,"originHeight":303,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(4).png">
 
 ```
 _dashboards/app/management/opensearch-dashboards/indexPatterns/create
@@ -105,28 +121,27 @@ _dashboards/app/management/opensearch-dashboards/indexPatterns/create
 
 위의 경로로 접속하여 로그 이름을 작성해줍니다       ex.  product-\* 
 
-[##_Image|kage@JSpkt/btsIQhFiwmk/01QbhJvip2YITna2VV55K1/img.png|CDM|1.3|{"originWidth":1136,"originHeight":226,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(5).png">
 
 Time field = @timestamp
 
 #### **Log 확인**
 
-[##_Image|kage@OkmX4/btsIRZ4tlTa/kbTclJPQfldQSIpfk6Xqx0/img.png|CDM|1.3|{"originWidth":1541,"originHeight":381,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(6).png">
 
 Discover 로 이동하여 줍니다.
 
-[##_Image|kage@GRNw5/btsISfssZb3/7uQkGs89dVj1nPE7Mc3GY1/img.png|CDM|1.3|{"originWidth":862,"originHeight":235,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(7).png">
 
 product-\* 를 클릭하면 로그를 확인할 수 있습니다.
 
 #### **특정 Log 확인**
 
-[##_Image|kage@bqBVMy/btsIQyfGwTA/OSsyz9fzuL2VRGHgfedVH0/img.png|CDM|1.3|{"originWidth":1383,"originHeight":333,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(8).png">
 
 메뉴 아래의 DevTools를 클릭하고
 
-[##_Image|kage@clWKm8/btsIQy03AQC/UZgey3EmPd6zwzuKrkKBGK/img.png|CDM|1.3|{"originWidth":837,"originHeight":147,"style":"widthContent"}_##]
-
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(9).png">
 ```
 POST /<로그 이름>-*/_search
 {
@@ -142,8 +157,8 @@ POST /<로그 이름>-*/_search
 
 #### **값이 있는 경우**
 
-[##_Image|kage@beKGv7/btsIPWnOYol/uDPkqxWzHU0kr5XfYkCMNK/img.png|CDM|1.3|{"originWidth":899,"originHeight":580,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(10).png">
 
 #### **값이 없는 경우**
 
-[##_Image|kage@bzii5d/btsIRuDDzDx/Rp9gobfmtaABKAsqAzAvKK/img.png|CDM|1.3|{"originWidth":733,"originHeight":325,"style":"widthContent"}_##]
+<img src="https://github.com/wngnl-dev/AWS/blob/main/Image/2024-07-30(11).png">
