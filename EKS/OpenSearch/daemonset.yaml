@@ -23,10 +23,16 @@ spec:
     spec:
       containers:
       - env:
+
         - name: OPENSEARCH_ENDPOINT
-          value: <OpenSearch 앤드포인트 https 빼고>
-        - name: AWS_REGION
-          value: <리전>
+          value: <OpenSearch 앤드포인트 https:// 빼고>
+
+        - name: OPENSEARCH_USER
+          value: <사용자 이름>
+          
+        - name: OPENSEARCH_PASSWORD
+          value: <비밀번호>
+          
 
         name: fluent-bit
         image: amazon/aws-for-fluent-bit:2.32.0
