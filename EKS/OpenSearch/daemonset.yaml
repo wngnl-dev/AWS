@@ -24,14 +24,12 @@ spec:
       containers:
       - env:
         - name: OPENSEARCH_ENDPOINT
-          value: <OPENSEARCH 앤드포인트 https 빼고>
+          value: <OpenSearch 앤드포인트 https 빼고>
         - name: AWS_REGION
           value: <리전>
-        - name: <환경변수>
-          value: <값>
 
         name: fluent-bit
-        image: amazon/aws-for-fluent-bit:2.32.2
+        image: amazon/aws-for-fluent-bit:2.32.0
         imagePullPolicy: Always
         ports:
         - containerPort: 2020
