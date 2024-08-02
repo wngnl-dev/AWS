@@ -1,12 +1,13 @@
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
+  name: fluent-bit
+  namespace: <네임스페이스>
   labels:
     k8s-app: fluent-bit-logging
-    kubernetes.io/cluster-service: "true"
     version: v1
-  name: fluent-bit
 spec:
+  replicas: 2  # 원하는 복제본 수
   selector:
     matchLabels:
       k8s-app: fluent-bit-logging
@@ -18,17 +19,16 @@ spec:
         prometheus.io/scrape: "true"
       labels:
         k8s-app: fluent-bit-logging
-        kubernetes.io/cluster-service: "true"
         version: v1
     spec:
       containers:
       - env:
         - name: AWS_REGION
-          value: <리전>
+          value: 리전
         - name: <환경변수>
-          value: <환경변수>        
-
-        name: fluent-bit
+          value: <환경변수>   
+          
+        name: fluent-bit-cnt
         image: amazon/aws-for-fluent-bit:2.32.2
         imagePullPolicy: Always
         ports:
@@ -43,14 +43,6 @@ spec:
           name: fluent-bit-config
       serviceAccountName: fluent-bit
       terminationGracePeriodSeconds: 10
-      tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Exists
-      - effect: NoExecute
-        operator: Exists
-      - effect: NoSchedule
-        operator: Exists
       volumes:
       - hostPath:
           path: /var/log
@@ -60,4 +52,4 @@ spec:
         name: varlibdockercontainers
       - configMap:
           name: fluent-bit-config
-        name: fluent-bit-config
+        name: fluent-bit-config     
