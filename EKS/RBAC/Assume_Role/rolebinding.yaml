@@ -14,8 +14,9 @@ metadata:
   name: <RoleBinding 이름>
   namespace: <네임스페이스>
 subjects:
-- kind: User
+- kind: ServiceAccount
   name: <Aws Auth UserName>
+  namespace: <네임스페이스>
 roleRef:
   kind: Role
   name: <RBAC 역활 이름>
