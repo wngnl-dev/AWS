@@ -22,6 +22,10 @@ subjects:
   - kind: ServiceAccount
     name: fluentd
     namespace: fluentd
+
+
+
+    
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -88,6 +92,10 @@ data:
         flush_mode immediate
       </buffer>
     </match>
+
+
+
+
 ---
 apiVersion: apps/v1
 kind: DaemonSet
