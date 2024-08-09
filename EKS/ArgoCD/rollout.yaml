@@ -5,31 +5,36 @@ metadata:
   namespace: <namespace 이름>
   labels:
     <Pod key> : <Pod value> 
-    
 spec:
   replicas: <생성할 파드 수>
   selector:
     matchLabels:
       <Pod key> : <Pod value>
-      
   template:
     metadata:
       labels:
         <Pod Key> : <Pod Value>
-        
     spec:
-        
       containers:
         - name: <컨테이너 이름>
           image: <Docekr 이미지 경로>
           ports:
           - containerPort: <애플리케이션 포트>
-        resources:
-          limits:
-            cpu: 500m
-          requests:
-            cpu: 200m
   strategy:
     blueGreen:
       activeService: <서비스 이름>
       autoPromotionEnabled: false
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: <서비스 이름>
+  namespace: <namespace 이름>
+spec:
+  selector:
+    <Pod key> : <Pod value> 
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: <애플리케이션 포트>
+  type: NodePort
