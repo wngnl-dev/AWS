@@ -12,3 +12,10 @@ function docker() {
     fi
 }
 ```
+```
+AWS_REGION=ap-northeast-2
+ACCOUNT_ID=654654489681
+docker rmi -f $(docker images) 2>/dev/null \
+; aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com" > /dev/null 2>&1 \
+; docker pull $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/employee:latest
+```
