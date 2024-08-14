@@ -40,7 +40,7 @@ data:
         Match               <deployment 이름>.*
         region              ${AWS_REGION}
         log_group_name      <로그그룹 이름>
-        log_stream_name   <스트림 이름>
+        log_stream_name     <스트림 이름>
         auto_create_group   true
         extra_user_agent    container-insights
 
