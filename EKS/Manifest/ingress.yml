@@ -9,7 +9,7 @@ metadata:
     alb.ingress.kubernetes.io/subnets: <서브넷 아이디 or 이름>, <서브넷 아이디 or 이름>
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: <>
-    alb.ingress.kubernetes.io/security-groups: wsi-alb-app-sg
+    alb.ingress.kubernetes.io/security-groups: wsi-app-alb-sg
 spec:
   ingressClassName: alb
   rules:
