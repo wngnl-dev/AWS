@@ -1,3 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: blue-green-svc
+  namespace: app
+spec:
+  selector:
+    wsi: app 
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: NodePort
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
