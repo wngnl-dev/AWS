@@ -9,7 +9,8 @@ phases:
       - export ARGO_USER=""
       - export ARGO_PASSWORD=""
       - export ARGO_SERVER=""
-      - export ARGO_APP_NAME=""
+      - export ARGO_APP_NAME=""\
+      - export ROLLOUT_NAME="blue-green-app"
 
       # Amazon ECR에 로그인
       - <ECR 인증>
@@ -34,4 +35,5 @@ phases:
   post_build:
     commands:
       # Argo CD CLI를 통해 애플리케이션 동기화
-      - argocd app sync ${ARGO_APP_NAME}
+      - argocd app sync ${ARGO_APP_NAME} --prune
+      - argocd app actions run ${ARGO_APP_NAME} restart --kind Rollout --resource-name ${ROLLOUT_NAME}
