@@ -20,21 +20,8 @@ spec:
           image: <Docekr 이미지 경로>
           ports:
           - containerPort: <애플리케이션 포트>
+          imagePullPolicy: Always  # 이미지를 항상 새로 가져오도록 설정
   strategy:
     blueGreen:
-      activeService: <서비스 이름>
-      autoPromotionEnabled: false
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: <서비스 이름>
-  namespace: <namespace 이름>
-spec:
-  selector:
-    <Pod key> : <Pod value> 
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: <애플리케이션 포트>
-  type: NodePort
+      activeService: blue-green-svc
+      autoPromotionEnabled: true
