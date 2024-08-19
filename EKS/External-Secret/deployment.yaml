@@ -43,8 +43,10 @@ spec:
           - name: MYSQL_PORT
             value: ""
           resources:
-            limits:
-              cpu: 500m
             requests:
-              cpu: 200m
+              memory: "500Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "250m"
 
