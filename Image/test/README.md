@@ -1,3 +1,47 @@
+# dynaomodb 만들기
+# 1 과제
+
+```
+rds 멀티
+rds 보안그룹 소스
+ecr scan
+flowlog
+insight
+calico 80
+pod limit
+index.html 원상복구
+```
+
+```
+flowlog
+lattice
+ecr deny
+rds 역추적
+cloudfront /
+```
+
+```
+calico
+end - s3 ecrdkr ecrapi
+loggroup kms
+```
+
+# 2 - 과제
+**aws configure**
+
+정책 직접 만들어서 연결
+
+Config 보안그룹 설정
+
+Config 전체 설정
+
+end - sqs, s3 ec2
+
+Ec2에 admin 역활 따로 만들어서 넣기
+
+poweraccess, nat instance, end - s3, dynamo
+
+
 # ECR Pull 차단
 ```
 function docker() {
